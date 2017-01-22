@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace Coolbooru {
-
-
     /// <summary>
     /// Represents a search query.
     /// </summary>
@@ -80,16 +78,33 @@ namespace Coolbooru {
         public List<object> interactions;
     }
 
+	/// <summary>
+	/// Represents possible search result sorting modes.
+	/// </summary>
+	public class CoolSearchSort {
+		public static string CreationDate { get { return "created_at"; } }
+		public static string Score { get { return "score"; } }
+		public static string Relevance { get { return "relevance"; } }
+		public static string Wdith { get { return "width"; } }
+		public static string Height { get { return "height"; } }
+		public static string Random { get { return "random"; } }
+	}
+
     /// <summary>
     /// Represents arguments to a search query.
     /// </summary>
     public class CoolSearchQuery {
         private string pq;
+		private string psf;
 
         public string q {
             get { return pq; }
             set { pq = Uri.EscapeUriString(value); }
         }
+		public string sf {
+			get { return psf; }
+			set { psf = Uri.EscapeUriString(value); }
+		}
         public int page = 1;
         public bool comments = false;
         public bool fav = false;
@@ -180,7 +195,6 @@ namespace Coolbooru {
     /// The main functions of Coolbooru.
     /// </summary>
     public class Coolbooru {
-
         public const string CONSTRAINT_ID = "id";
         public const string CONSTRAINT_UPDATED = "updated";
         public const string CONSTRAINT_CREATED = "created";
@@ -205,13 +219,14 @@ namespace Coolbooru {
             return JsonConvert.DeserializeObject<T>(await clientFactory().GetStringAsync(url));
         }
 
-        /// <summary>
-        /// Search Derpibooru using a certain tag or tags.
-        /// </summary>
-        /// <param name="query">The tag(s) to search for (e.g. pinkie pie)</param>
-        /// <param name="page">Pagination</param>
-        /// <returns>A CoolSearch representing the result</returns>
-        public static async Task<CoolSearch> search(string query, int page = 1) {
+		/// <summary>
+		/// Search Derpibooru using a certain tag or tags.
+		/// See https://derpibooru.org/search/syntax for search syntax information.
+		/// </summary>
+		/// <param name="query">The tag(s) to search for (e.g. pinkie pie)</param>
+		/// <param name="page">Pagination</param>
+		/// <returns>A CoolSearch representing the result</returns>
+		public static async Task<CoolSearch> search(string query, int page = 1) {
             return await doResponse<CoolSearch>("https://derpibooru.org/search.json?q=" + Uri.EscapeUriString(query) + "&page=" + page);
         }
 
@@ -224,6 +239,7 @@ namespace Coolbooru {
             string url = "https://derpibooru.org/search.json?q=" + q.q + "&page=" + q.page;
             if (q.comments) url += "&comments=true";
             if (q.fav) url += "&fav=true";
+			if (q.sf != null) url += "&sf=" + q.sf;
 
             return await doResponse<CoolSearch>(url);
         }
@@ -250,7 +266,7 @@ namespace Coolbooru {
         /// </summary>
         /// <param name="list">The list to get the contents of.</param>
         /// <returns>A CoolList object representing the result</returns>
-        public static async Task<CoolList> list(string list, int page=1) {
+        public static async Task<CoolList> list(string list, int page = 1) {
             return await doResponse<CoolList>("https://derpibooru.org/lists/" + list + ".json&page=" + page);
         }
 
@@ -360,5 +376,4 @@ namespace Coolbooru {
             return await doResponse<CoolEmbed>("https://derpibooru.org/oembed.json?url=" + url);
         }
     }
-
 }
