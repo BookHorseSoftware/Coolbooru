@@ -1,0 +1,17 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>antigravities</authors>
+    <owners>antigravities</owners>
+    <licenseUrl>https://www.gnu.org/licenses/lgpl-3.0.en.html</licenseUrl>
+    <projectUrl>https://github.com/antigravities/Coolbooru</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A 20% cooler Derpibooru API client in C#/.NET</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright 2017 antigravities.</copyright>
+    <tags>api derpibooru</tags>
+  </metadata>
+</package>
