@@ -105,6 +105,7 @@ namespace Coolbooru {
 			get { return psf; }
 			set { psf = Uri.EscapeUriString(value); }
 		}
+		public string key;
 		public int page = 1;
 		public bool comments = false;
 		public bool fav = false;
@@ -119,6 +120,7 @@ namespace Coolbooru {
 		public string last;
 		public bool comments = false;
 		public bool fav = false;
+		public string key;
 	}
 
 	/// <summary>
@@ -149,6 +151,7 @@ namespace Coolbooru {
 	/// </summary>
 	public class CoolImageQuery {
 		public string constraint;
+		public string key;
 		public int page = 1;
 		public int? gt;
 		public int? gte;
@@ -170,6 +173,17 @@ namespace Coolbooru {
 		public bool comments = false;
 		public bool fav = false;
 		public bool random_image;
+	}
+
+	/// <summary>
+	/// Represents arguments to a user gallery query.
+	/// </summary>
+	public class CoolUserGalleryQuery {
+		public string user;
+		public int? id;
+		public string key;
+		public int page = 1;
+		public bool include_images = false;
 	}
 
 	/// <summary>
@@ -237,6 +251,7 @@ namespace Coolbooru {
 		/// <returns>A CoolSearch representing the result</returns>
 		public static async Task<CoolSearch> search(CoolSearchQuery q) {
 			string url = "https://derpibooru.org/search.json?q=" + q.q + "&page=" + q.page;
+			if (q.key != null) url += "&key=" + q.key;
 			if (q.comments) url += "&comments=true";
 			if (q.fav) url += "&fav=true";
 			if (q.sf != null) url += "&sf=" + q.sf;
@@ -278,6 +293,7 @@ namespace Coolbooru {
 		/// <returns>A CoolList object representing the result</returns>
 		public static async Task<CoolList> list(CoolListQuery q) {
 			string url = "https://derpibooru.org/lists/" + q.list + ".json?page=" + q.page;
+			if (q.key != null) url += "&key=" + q.key;
 			if (q.comments) url += "&comments=true";
 			if (q.fav) url += "&fav=true";
 
@@ -338,12 +354,34 @@ namespace Coolbooru {
 		}
 
 		/// <summary>
+		/// Get a gallery with a CoolUserGalleryQuery.
+		/// </summary>
+		/// <param name="q">A CoolUserGalleryQuery object</param>
+		/// <returns>A CoolGallery representing the result.</returns>
+		public static async Task<CoolGallery> userGallery(CoolUserGalleryQuery q) {
+			string url = "https://derpibooru.org/galleries/";
+			if (q.user != null && q.id != null)
+				url += q.user + "/" + q.id + ".json";
+			else {
+				if (q.user != null) url += q.user + ".json";
+				if (q.id != null) url += q.id + ".json";
+			}
+
+			url += "?page=" + q.page;
+			if (q.include_images) url += "&include_images=true";
+			if (q.key != null) url += "&key=" + q.key;
+
+			return await doResponse<CoolGallery>(url);
+		}
+
+		/// <summary>
 		/// Filter the front-page images.
 		/// </summary>
 		/// <param name="q">A CoolImageQuery representing the query.</param>
 		/// <returns>A CoolImages object representing the result.</returns>
 		public static async Task<CoolImages> images(CoolImageQuery q) {
 			string url = "https://derpibooru.org/images.json?page=" + q.page;
+			if (q.key != null) url += "&key=" + q.key;
 			if (q.constraint != null) url += "&constraint=" + q.constraint;
 			if (q.gt != null) url += "&gt=" + q.gt;
 			if (q.gte != null) url += "&gte=" + q.gte;
