@@ -175,6 +175,9 @@ namespace Coolbooru {
 		public bool random_image;
 	}
 
+	/// <summary>
+	/// Represents arguments to a user gallery query.
+	/// </summary>
 	public class CoolUserGalleryQuery {
 		public string user;
 		public int? id;
