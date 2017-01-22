@@ -79,18 +79,6 @@ namespace Coolbooru {
 	}
 
 	/// <summary>
-	/// Represents possible search result sorting modes.
-	/// </summary>
-	public class CoolSearchSort {
-		public static string CreationDate { get { return "created_at"; } }
-		public static string Score { get { return "score"; } }
-		public static string Relevance { get { return "relevance"; } }
-		public static string Wdith { get { return "width"; } }
-		public static string Height { get { return "height"; } }
-		public static string Random { get { return "random"; } }
-	}
-
-	/// <summary>
 	/// Represents arguments to a search query.
 	/// </summary>
 	public class CoolSearchQuery {
@@ -209,9 +197,17 @@ namespace Coolbooru {
 	/// The main functions of Coolbooru.
 	/// </summary>
 	public class Coolbooru {
+
 		public const string CONSTRAINT_ID = "id";
 		public const string CONSTRAINT_UPDATED = "updated";
 		public const string CONSTRAINT_CREATED = "created";
+
+		public const string SORT_CREATEDAT = "created_at";
+		public const string SORT_SCORE = "score";
+		public const string SORT_RELEVANCE = "relevance";
+		public const string SORT_WIDTH = "width";
+		public const string SORT_HEIGHT = "height";
+		public const string SORT_RANDOM = "random";
 
 		/// <summary>
 		/// Creates a new HTTP client for use with API calls.
