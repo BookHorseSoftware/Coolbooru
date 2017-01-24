@@ -474,7 +474,7 @@ namespace Coolbooru {
 	/// <summary>
 	/// The main functions of Coolbooru.
 	/// </summary>
-	public class Coolbooru {
+	public class CoolRequests {
 		/// <summary>
 		/// The ID constraint for use with List searches.
 		/// </summary>
