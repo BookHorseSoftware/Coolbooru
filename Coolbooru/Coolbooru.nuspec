@@ -10,7 +10,7 @@
 		<projectUrl>https://github.com/antigravities/Coolbooru</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
-		<releaseNotes>Fix whitespace, minor prettification, add undocumented search result sort support</releaseNotes>
+		<releaseNotes>An update to Coolbooru</releaseNotes>
 		<copyright>$copyright$</copyright>
 		<tags>api derpibooru</tags>
     
