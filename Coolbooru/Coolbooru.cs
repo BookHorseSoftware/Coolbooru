@@ -137,27 +137,27 @@ namespace Coolbooru {
 	/// </summary>
 	public class CoolRepresentation {
 		/// <summary>
-		/// A very small thumbnail for the image.
+		/// A URL that points to a very small thumbnail for the image.
 		/// </summary>
 		public string thumb_tiny;
 		/// <summary>
-		/// A small thumbnail for the image.
+		/// A URL that points to a small thumbnail for the image.
 		/// </summary>
 		public string thumb_small;
 		/// <summary>
-		/// A thumbnail for the image.
+		/// A URL that points to a thumbnail for the image.
 		/// </summary>
 		public string thumb;
 		/// <summary>
-		/// A small version of the image.
+		/// A URL that points to a small version of the image.
 		/// </summary>
 		public string small;
 		/// <summary>
-		/// A medium version of the image.
+		/// A URL that points to a medium version of the image.
 		/// </summary>
 		public string medium;
 		/// <summary>
-		/// A full-resolution version of the image.
+		/// A URL that points to a full-resolution version of the image.
 		/// </summary>
 		public string full;
 	}
