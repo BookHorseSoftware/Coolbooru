@@ -121,6 +121,9 @@ namespace Coolbooru {
 		/// The image's source URL, if provided.
 		/// </summary>
 		public string source_url;
+		/// <summary>
+		/// Available "representations", or different sizes, of the image.
+		/// </summary>
 		public CoolRepresentation representations;
 		/// <summary>
 		/// Whether or not the image was "rendered" by Derpibooru.
@@ -324,9 +327,9 @@ namespace Coolbooru {
 		/// <summary>
 		/// The field to search and sort by. See the CONSTRAINT_* constants.
 		/// </summary>
-		/// <see cref="Coolbooru.CONSTRAINT_ID"/>
-		/// <seealso cref="Coolbooru.CONSTRAINT_CREATED"/>
-		/// <seealso cref="Coolbooru.CONSTRAINT_UPDATED"/>
+		/// <see cref="CoolStuff.CONSTRAINT_ID"/>
+		/// <seealso cref="CoolStuff.CONSTRAINT_CREATED"/>
+		/// <seealso cref="CoolStuff.CONSTRAINT_UPDATED"/>
 		public string Constraint;
 		/// <summary>
 		/// The page of results to return. Defaults to 1.
@@ -483,7 +486,7 @@ namespace Coolbooru {
 	/// <summary>
 	/// The main functions of Coolbooru.
 	/// </summary>
-	public class CoolRequests {
+	public class CoolStuff {
 		/// <summary>
 		/// The ID constraint for use with List searches.
 		/// </summary>
