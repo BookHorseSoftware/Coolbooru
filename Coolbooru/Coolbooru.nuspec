@@ -7,7 +7,7 @@
 		<authors>$author$</authors>
 		<owners>antigravities, bytewavemlp</owners>
 		<licenseUrl>https://www.gnu.org/licenses/lgpl-3.0.en.html</licenseUrl>
-		<projectUrl>https://github.com/antigravities/Coolbooru</projectUrl>
+		<projectUrl>https://github.com/BookHorseSoftware/Coolbooru</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
 		<releaseNotes>An update to Coolbooru</releaseNotes>

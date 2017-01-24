@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Coolbooru")]
 [assembly: AssemblyDescription("A 20% cooler Derpibooru client in C#/.NET")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("antigravities, Bytewave")]
+[assembly: AssemblyCompany("Book Horse Software")]
 [assembly: AssemblyProduct("Coolbooru")]
-[assembly: AssemblyCopyright("Copyright © 2017 antigravities.")]
+[assembly: AssemblyCopyright("Copyright © 2017 Book Horse Software.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
