@@ -689,8 +689,8 @@ namespace Coolbooru {
 		/// <param name="q">A CoolImageQuery representing the query.</param>
 		/// <returns>A CoolImages object representing the result.</returns>
 		public static async Task<CoolImages> Images(CoolImageQuery q) {
-			string url = "https://derpibooru.org/images.json?page=" + q.page;
-			if (q.APIKey != null) url += "&key=" + q.key;
+			string url = "https://derpibooru.org/images.json?page=" + q.Page;
+			if (q.APIKey != null) url += "&key=" + q.APIKey;
 			if (q.Constraint != null) {
 				if (q.Constraint == CONSTRAINT_ID) {
 					if (q.IDGreaterThan != null)
