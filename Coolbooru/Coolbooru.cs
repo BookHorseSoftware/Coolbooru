@@ -197,7 +197,6 @@ namespace Coolbooru {
 	/// The main functions of Coolbooru.
 	/// </summary>
 	public class Coolbooru {
-
 		public const string CONSTRAINT_ID = "id";
 		public const string CONSTRAINT_UPDATED = "updated";
 		public const string CONSTRAINT_CREATED = "created";
@@ -213,7 +212,7 @@ namespace Coolbooru {
 		/// Creates a new HTTP client for use with API calls.
 		/// </summary>
 		/// <returns>a new HTTP client for use with API calls.</returns>
-		private static HttpClient clientFactory() {
+		private static HttpClient ClientFactory() {
 			HttpClient c = new HttpClient();
 			c.DefaultRequestHeaders.UserAgent.ParseAdd("Coolbooru");
 			return c;
@@ -225,8 +224,8 @@ namespace Coolbooru {
 		/// <typeparam name="T">Model to serialize to.</typeparam>
 		/// <param name="url">URL to query.</param>
 		/// <returns>Response based on the model passed in.</returns>
-		private static async Task<T> doResponse<T>(string url) {
-			return JsonConvert.DeserializeObject<T>(await clientFactory().GetStringAsync(url));
+		private static async Task<T> DoResponse<T>(string url) {
+			return JsonConvert.DeserializeObject<T>(await ClientFactory().GetStringAsync(url));
 		}
 
 		/// <summary>
@@ -236,8 +235,8 @@ namespace Coolbooru {
 		/// <param name="query">The tag(s) to search for (e.g. pinkie pie)</param>
 		/// <param name="page">Pagination</param>
 		/// <returns>A CoolSearch representing the result</returns>
-		public static async Task<CoolSearch> search(string query, int page = 1) {
-			return await doResponse<CoolSearch>("https://derpibooru.org/search.json?q=" + Uri.EscapeUriString(query) + "&page=" + page);
+		public static async Task<CoolSearch> Search(string query, int page = 1) {
+			return await DoResponse<CoolSearch>("https://derpibooru.org/search.json?q=" + Uri.EscapeUriString(query) + "&page=" + page);
 		}
 
 		/// <summary>
@@ -245,14 +244,14 @@ namespace Coolbooru {
 		/// </summary>
 		/// <param name="q">A CoolSearchQuery object</param>
 		/// <returns>A CoolSearch representing the result</returns>
-		public static async Task<CoolSearch> search(CoolSearchQuery q) {
+		public static async Task<CoolSearch> Search(CoolSearchQuery q) {
 			string url = "https://derpibooru.org/search.json?q=" + q.q + "&page=" + q.page;
 			if (q.key != null) url += "&key=" + q.key;
 			if (q.comments) url += "&comments=true";
 			if (q.fav) url += "&fav=true";
 			if (q.sf != null) url += "&sf=" + q.sf;
 
-			return await doResponse<CoolSearch>(url);
+			return await DoResponse<CoolSearch>(url);
 		}
 
 		/// <summary>
@@ -260,16 +259,16 @@ namespace Coolbooru {
 		/// </summary>
 		/// <param name="itemID">An item ID.</param>
 		/// <returns>A CoolItem representing the result</returns>
-		public static async Task<CoolItem> item(int itemID) {
-			return await doResponse<CoolItem>("https://derpibooru.org/" + itemID + ".json");
+		public static async Task<CoolItem> Item(int itemID) {
+			return await DoResponse<CoolItem>("https://derpibooru.org/" + itemID + ".json");
 		}
 
 		/// <summary>
 		/// Get the contents of lists top_scoring, top_commented, all_time_top_scoring
 		/// </summary>
 		/// <returns>A CoolLists object representing the result</returns>
-		public static async Task<CoolLists> lists() {
-			return await doResponse<CoolLists>("https://derpibooru.org/lists.json");
+		public static async Task<CoolLists> Lists() {
+			return await DoResponse<CoolLists>("https://derpibooru.org/lists.json");
 		}
 
 		/// <summary>
@@ -277,8 +276,8 @@ namespace Coolbooru {
 		/// </summary>
 		/// <param name="list">The list to get the contents of.</param>
 		/// <returns>A CoolList object representing the result</returns>
-		public static async Task<CoolList> list(string list, int page = 1) {
-			return await doResponse<CoolList>("https://derpibooru.org/lists/" + list + ".json&page=" + page);
+		public static async Task<CoolList> List(string list, int page = 1) {
+			return await DoResponse<CoolList>("https://derpibooru.org/lists/" + list + ".json&page=" + page);
 		}
 
 
@@ -287,21 +286,13 @@ namespace Coolbooru {
 		/// </summary>
 		/// <param name="q">A CoolListQuery representing the parameters of the request.</param>
 		/// <returns>A CoolList object representing the result</returns>
-		public static async Task<CoolList> list(CoolListQuery q) {
+		public static async Task<CoolList> List(CoolListQuery q) {
 			string url = "https://derpibooru.org/lists/" + q.list + ".json?page=" + q.page;
 			if (q.key != null) url += "&key=" + q.key;
 			if (q.comments) url += "&comments=true";
 			if (q.fav) url += "&fav=true";
 
-			return await doResponse<CoolList>(url);
-		}
-
-		/// <summary>
-		/// Get the front-page images.
-		/// </summary>
-		/// <returns>A CoolImages object representing the result</returns>
-		public static async Task<CoolImages> images() {
-			return await doResponse<CoolImages>("https://derpibooru.org/images.json");
+			return await DoResponse<CoolList>(url);
 		}
 
 		/// <summary>
@@ -309,8 +300,8 @@ namespace Coolbooru {
 		/// </summary>
 		/// <param name="user">The user whose galleries you want to get.</param>
 		/// <returns>A List of CoolGalleries representing the result</returns>
-		public static async Task<List<CoolGallery>> userGalleries(string user) {
-			return await doResponse<List<CoolGallery>>("https://derpibooru.org/galleries/" + user + ".json");
+		public static async Task<List<CoolGallery>> UserGalleries(string user) {
+			return await DoResponse<List<CoolGallery>>("https://derpibooru.org/galleries/" + user + ".json");
 		}
 
 		/// <summary>
@@ -320,11 +311,11 @@ namespace Coolbooru {
 		/// <param name="page">Pagination.</param>
 		/// <param name="include_images">"When set, include arrays of image IDs featured in each gallery, in the order defined by the owning user, disregarding content filters." Doesn't seem to do much, though.</param>
 		/// <returns>A List of CoolGalleries representing the result</returns>
-		public static async Task<List<CoolGallery>> userGalleries(string user, int page = 1, bool include_images = false) {
+		public static async Task<List<CoolGallery>> UserGalleries(string user, int page = 1, bool include_images = false) {
 			string url = "https://derpibooru.org/galleries/" + user + ".json?page=" + page;
 			if (include_images) url += "&include_images=true";
 
-			return await doResponse<List<CoolGallery>>(url);
+			return await DoResponse<List<CoolGallery>>(url);
 		}
 
 		/// <summary>
@@ -334,9 +325,9 @@ namespace Coolbooru {
 		/// <param name="id">The gallery ID.</param>
 		/// <param name="page">Pagination.</param>
 		/// <returns>A CoolGallery representing the result.</returns>
-		public static async Task<CoolGallery> userGallery(string user, int id, int page = 1) {
+		public static async Task<CoolGallery> UserGallery(string user, int id, int page = 1) {
 			string url = "https://derpibooru.org/galleries/" + user + "/" + id + ".json?page=" + page;
-			return await doResponse<CoolGallery>(url);
+			return await DoResponse<CoolGallery>(url);
 		}
 
 		/// <summary>
@@ -345,8 +336,8 @@ namespace Coolbooru {
 		/// <param name="id">The gallery ID.</param>
 		/// <param name="page">Pagination.</param>
 		/// <returns>A CoolGallery representing the result.</returns>
-		public static async Task<CoolGallery> userGallery(int id, int page = 1) {
-			return await doResponse<CoolGallery>("https://derpibooru.org/galleries/" + id + ".json?page=" + page);
+		public static async Task<CoolGallery> UserGallery(int id, int page = 1) {
+			return await DoResponse<CoolGallery>("https://derpibooru.org/galleries/" + id + ".json?page=" + page);
 		}
 
 		/// <summary>
@@ -354,7 +345,7 @@ namespace Coolbooru {
 		/// </summary>
 		/// <param name="q">A CoolUserGalleryQuery object</param>
 		/// <returns>A CoolGallery representing the result.</returns>
-		public static async Task<CoolGallery> userGallery(CoolUserGalleryQuery q) {
+		public static async Task<CoolGallery> UserGallery(CoolUserGalleryQuery q) {
 			string url = "https://derpibooru.org/galleries/";
 			if (q.user != null && q.id != null)
 				url += q.user + "/" + q.id + ".json";
@@ -367,7 +358,15 @@ namespace Coolbooru {
 			if (q.include_images) url += "&include_images=true";
 			if (q.key != null) url += "&key=" + q.key;
 
-			return await doResponse<CoolGallery>(url);
+			return await DoResponse<CoolGallery>(url);
+		}
+
+		/// <summary>
+		/// Get the front-page images.
+		/// </summary>
+		/// <returns>A CoolImages object representing the result</returns>
+		public static async Task<CoolImages> Images() {
+			return await DoResponse<CoolImages>("https://derpibooru.org/images.json");
 		}
 
 		/// <summary>
@@ -375,7 +374,7 @@ namespace Coolbooru {
 		/// </summary>
 		/// <param name="q">A CoolImageQuery representing the query.</param>
 		/// <returns>A CoolImages object representing the result.</returns>
-		public static async Task<CoolImages> images(CoolImageQuery q) {
+		public static async Task<CoolImages> Images(CoolImageQuery q) {
 			string url = "https://derpibooru.org/images.json?page=" + q.page;
 			if (q.key != null) url += "&key=" + q.key;
 			if (q.constraint != null) url += "&constraint=" + q.constraint;
@@ -389,7 +388,7 @@ namespace Coolbooru {
 			if (q.fav) url += "&fav=true";
 			if (q.random_image) url += "&random_image=true";
 
-			return await doResponse<CoolImages>(url);
+			return await DoResponse<CoolImages>(url);
 		}
 
 		/// <summary>
@@ -397,8 +396,8 @@ namespace Coolbooru {
 		/// </summary>
 		/// <param name="id">A post ID.</param>
 		/// <returns>A CoolEmbed object representing the result.</returns>
-		public static async Task<CoolEmbed> embed(int id) {
-			return await doResponse<CoolEmbed>("https://derpibooru.org/oembed.json?url=https://derpibooru.org/" + id);
+		public static async Task<CoolEmbed> Embed(int id) {
+			return await DoResponse<CoolEmbed>("https://derpibooru.org/oembed.json?url=https://derpibooru.org/" + id);
 		}
 
 		/// <summary>
@@ -406,8 +405,8 @@ namespace Coolbooru {
 		/// </summary>
 		/// <param name="url">A URL.</param>
 		/// <returns>A CoolEmbed object representing the result.</returns>
-		public static async Task<CoolEmbed> embed(string url) {
-			return await doResponse<CoolEmbed>("https://derpibooru.org/oembed.json?url=" + url);
+		public static async Task<CoolEmbed> Embed(string url) {
+			return await DoResponse<CoolEmbed>("https://derpibooru.org/oembed.json?url=" + url);
 		}
 	}
 }
