@@ -166,8 +166,17 @@ namespace Coolbooru {
 	/// Represents the default Lists available.
 	/// </summary>
 	public class CoolLists {
+		/// <summary>
+		/// The default top scoring list.
+		/// </summary>
 		public List<CoolItem> top_scoring;
+		/// <summary>
+		/// The default top commented list.
+		/// </summary>
 		public List<CoolItem> top_commented;
+		/// <summary>
+		/// The list of all time top scoring images.
+		/// </summary>
 		public List<CoolItem> all_time_top_scoring;
 		public List<object> interactions;
 	}
