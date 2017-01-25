@@ -528,7 +528,7 @@ namespace Coolbooru {
 		/// <summary>
 		/// Creates a new HTTP client for use with API calls.
 		/// </summary>
-		/// <returns>a new HTTP client for use with API calls.</returns>
+		/// <returns>A new HTTP client for use with API calls.</returns>
 		private static HttpClient ClientFactory() {
 			HttpClient c = new HttpClient();
 			c.DefaultRequestHeaders.UserAgent.ParseAdd("Coolbooru/" + typeof(CoolStuff).Assembly.GetName().Version);
