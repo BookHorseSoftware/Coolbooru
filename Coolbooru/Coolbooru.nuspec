@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0"?>
 <package>
-	<metadata>
-		<id>$id$</id>
-		<version>$version$</version>
-		<title>$title$</title>
-		<authors>$author$</authors>
-		<owners>antigravities, bytewavemlp</owners>
-		<licenseUrl>https://www.gnu.org/licenses/lgpl-3.0.en.html</licenseUrl>
-		<projectUrl>https://github.com/BookHorseSoftware/Coolbooru</projectUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>$description$</description>
-		<releaseNotes>An update to Coolbooru</releaseNotes>
-		<copyright>$copyright$</copyright>
-		<tags>api derpibooru</tags>
-    
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>antigravities, bytewavemlp</owners>
+    <licenseUrl>https://www.gnu.org/licenses/lgpl-3.0.en.html</licenseUrl>
+    <projectUrl>https://github.com/BookHorseSoftware/Coolbooru</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>((UPDATE THIS ON RELEASE)) An update to Coolbooru</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>api derpibooru</tags>
+
     <dependencies>
       <dependency id="Newtonsoft.Json" version="9.0.1" />
     </dependencies>
-	</metadata>
+  </metadata>
 </package>
