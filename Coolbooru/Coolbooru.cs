@@ -188,6 +188,9 @@ namespace Coolbooru {
 	/// Represents the result of the Images API call.
 	/// </summary>
 	public class CoolImages {
+		/// <summary>
+		/// A list of the items on the "front page."
+		/// </summary>
 		public List<CoolItem> images;
 		public List<object> interactions;
 	}
